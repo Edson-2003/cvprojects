@@ -68,20 +68,6 @@ printlist()
   return;
 }
 
-
-
-bool
-extension(const char *name)
-{
-  if(name == NULL) return NULL;
-  int len = strlen(name);
-  if(*name[len - 5] == ".")
-  {
-    if((*name[len - 4] == "p") && (*name[len - 3] == "n") && (*name[len - 2] == "g")) return true;
-  }
-}
-
-
 void
 listFiles(const char *dirpath)
 {
@@ -105,17 +91,18 @@ listFiles(const char *dirpath)
     { 
       //printf("%s \n", dp->d_name);
       
-      /*
-      char *name;
+      int len = strlen(dp->d_name); 
+      char name[len];
       strcpy(name, dp->d_name);
-
+      
+      /*
       char separator[] = ".";
       strtok(dp->d_name, separator);
       strtok(NULL, separator);
       //if((strcmp(strtok(dp->d_name, "."), "png") == 0) || (strcmp(strtok(dp->d_name, "."), "jpg") == 0)) continue;
       //printf("%s \n", extension);
       */
-      if(extension(dp->d_name)) insert(dp->d_name);
+      if(strstr(name, ".png") != NULL) insert(dp->d_name);
 
     }
    // printf("%s/", dirpath);
